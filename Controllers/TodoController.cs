@@ -25,11 +25,11 @@ public class TodoController : Controller
     public IActionResult Create()
     {
         ViewData["Title"] = "Cadastrar Tarefas";
-        return View();
+        return View("Form");
     }
 
     [HttpPost]
-    public IActionResult Create(CreateTodoViewModel data)
+    public IActionResult Create(FormTodoViewModel data)
     {
         if (!ModelState.IsValid)
         {
@@ -51,17 +51,17 @@ public class TodoController : Controller
             return NotFound();
         }
 
-        var viewModel = new EditTodoViewModel
+        var viewModel = new FormTodoViewModel
         {
             Title = todo.Title,
             Date = todo.Date
         };
         ViewData["Title"] = "Editar Tarefa";
-        return View(viewModel);
+        return View("Form", viewModel);
     }
 
     [HttpPost]
-    public IActionResult Edit(int id, EditTodoViewModel data)
+    public IActionResult Edit(int id, FormTodoViewModel data)
     {
         var todo = _context.Todos.Find(id);
         if (todo is null)
@@ -90,6 +90,19 @@ public class TodoController : Controller
         }
 
         _context.Remove(todo);
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
+    }
+
+    public IActionResult ToComplete(int id)
+    {
+        var todo = _context.Todos.Find(id);
+        if (todo is null)
+        {
+            return NotFound();
+        }
+
+        todo.IsCompleted = true;
         _context.SaveChanges();
         return RedirectToAction(nameof(Index));
     }

@@ -28,13 +28,21 @@
                         <td> @todo.IsCompleted </td>
                         <td>
 
-                            <a href="#" class="btn btn-sm btn-success"> Conlcuir </a>
+                            <a
+                                asp-controller="Todo"
+                                asp-action="ToComplete"
+                                asp-route-id="@todo.Id"
+                                class="btn btn-sm btn-success"
+                            > 
+                                Conlcuir
+                            </a>
 
                             <a
                                 asp-controller="Todo"
                                 asp-action="Edit"
                                 asp-route-id="@todo.Id"
-                                class="btn btn-sm btn-warning">
+                                class="btn btn-sm btn-warning"
+                            >
                                 Editar
                             </a>
                             
