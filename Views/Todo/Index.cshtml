@@ -24,15 +24,26 @@
                     <tr>
                         <th scope="row"> @todo.Id </th>
                         <td> @todo.Title </td>
-                        <td> @todo.Date </td>
-                        <td> @todo.IsCompleted </td>
+                        <td> @todo.Date.ToString("dd/MM/yyyy") </td>
+                        <td>
+                            @if (todo.IsCompleted)
+                            {
+                                <i class="text-sucess" data-feather="check-square"></i>
+                            }
+                            else
+                            {
+                                <i class="text-danger" data-feather="x-square"></i>
+                            }
+                        </td>
                         <td>
 
                             <a
                                 asp-controller="Todo"
                                 asp-action="ToComplete"
                                 asp-route-id="@todo.Id"
-                                class="btn btn-sm btn-success"
+                                onclick="return confirm('Concluir essa tarefa?')"
+                                class="btn btn-sm btn-success
+                                @(todo.IsCompleted ? "disabled" : "")"
                             > 
                                 Conlcuir
                             </a>
@@ -41,7 +52,8 @@
                                 asp-controller="Todo"
                                 asp-action="Edit"
                                 asp-route-id="@todo.Id"
-                                class="btn btn-sm btn-warning"
+                                class="btn btn-sm btn-warning
+                                @(todo.IsCompleted ? "disabled" : "")"
                             >
                                 Editar
                             </a>
@@ -50,6 +62,7 @@
                                 asp-controller="Todo"
                                 asp-action="Delete"
                                 asp-route-id="@todo.Id"
+                                onclick="return confirm('Deseja realmente excluir essa tarefa?')"
                                 class="btn btn-sm btn-danger"
                             >
                                 Excluir
