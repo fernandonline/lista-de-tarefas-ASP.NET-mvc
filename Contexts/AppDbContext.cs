@@ -11,9 +11,9 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-        Env.Load();
-        var connectionString = Env.GetString("DATABASE_URL");
-            builder.UseNpgsql(connectionString);
+      
+        var connectionString = "Data Source=TodoList.db";
+        builder.UseSqlite(connectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
