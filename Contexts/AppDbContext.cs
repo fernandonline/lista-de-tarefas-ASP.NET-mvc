@@ -8,9 +8,9 @@ public class AppDbContext : DbContext
 {
     public DbSet<Todo> Todos { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder builder)
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        builder.UseSqlite("Data Source=/app/publish/TodoList.db");
+        optionsBuilder.UseSqlite("Data Source=/app/publish/TodoList.db");
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
