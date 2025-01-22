@@ -13,6 +13,7 @@ RUN dotnet build "ToDoList.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "ToDoList.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet ef database update --project ToDoList.csproj --startup-project ToDoList.csproj
 
 FROM base AS final
 WORKDIR /app
