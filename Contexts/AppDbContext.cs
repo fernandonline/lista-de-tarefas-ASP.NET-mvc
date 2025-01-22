@@ -1,5 +1,4 @@
-﻿using DotNetEnv;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TodoList.EntityConfigs;
 using ToDoList.Models;
 
