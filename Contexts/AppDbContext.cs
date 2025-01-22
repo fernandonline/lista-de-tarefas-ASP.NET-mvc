@@ -2,6 +2,7 @@
 using TodoList.EntityConfigs;
 using ToDoList.Models;
 
+
 namespace TodoList.Contexts;
 
 public class AppDbContext : DbContext
@@ -9,9 +10,10 @@ public class AppDbContext : DbContext
     public DbSet<Todo> Todos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlite("Data Source=/app/publish/TodoList.db");
-    }
+{
+    optionsBuilder.UseInMemoryDatabase("TodoListInMemoryDb");
+}
+
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
