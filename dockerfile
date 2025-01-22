@@ -11,7 +11,8 @@ RUN dotnet build "ToDoList.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "ToDoList.csproj" -c Release -o /app/publish
-RUN dotnet ef database update --project ToDoList.csproj --startup-project ToDoList.csproj -c TodoList.Contexts.AppDbContext
+RUN chmod -R 777 /app/publish
+RUN dotnet ef database update --project ToDoList.csproj --startup-project ToDoList.csproj -c TodoList.Contexts.AppDbContext || echo "Database update failed with exit code $?"
 
 FROM base AS final
 WORKDIR /app

@@ -10,8 +10,7 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-        var connectionString = "Data Source=Data/TodoList.db";
-        builder.UseSqlite(connectionString);
+        builder.UseSqlite("Data Source=/app/publish/TodoList.db");
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
