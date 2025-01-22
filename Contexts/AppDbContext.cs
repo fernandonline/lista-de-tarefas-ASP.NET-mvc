@@ -9,10 +9,10 @@ public class AppDbContext : DbContext
 {
     public DbSet<Todo> Todos { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-{
-    optionsBuilder.UseInMemoryDatabase("TodoListInMemoryDb");
-}
+    protected override void OnConfiguring(DbContextOptionsBuilder Builder)
+    {
+        Builder.UseInMemoryDatabase("TodoListInMemoryDb");
+    }
 
 
     protected override void OnModelCreating(ModelBuilder builder)
