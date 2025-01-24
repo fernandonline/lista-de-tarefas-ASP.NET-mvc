@@ -34,7 +34,7 @@ public class TodoController : Controller
         if (!ModelState.IsValid)
         {
             ViewData["Title"] = "Cadastrar Tarefas";
-            return View(data);
+             return View("Form", data);
         }
 
         var todo = new Todo(data.Title, data.Date);
