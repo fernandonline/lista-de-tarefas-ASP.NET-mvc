@@ -24,8 +24,39 @@ public class TodoController : Controller
 
     public IActionResult Create()
     {
+        var viewModel = new FormTodoViewModel();
         ViewData["Title"] = "Cadastrar Tarefas";
-        return View("Form");
+        return View("Form", viewModel);
+    }
+
+    [HttpPost]
+    public IActionResult Save(FormTodoViewModel data)
+    {
+        if (!ModelState.IsValid)
+        {
+            ViewData["Title"] = data.Id == 0 ? "Cadastrar Tarefa" : "Editar Tarefa";
+            return View("Form", data);
+        }
+
+        if (data.Id == 0)
+        {
+            var todo = new Todo(data.Title, data.Date);
+            _context.Add(todo);
+        }
+        else
+        {
+            var todo = _context.Todos.Find(data.Id);
+            if (todo is null)
+            {
+                return NotFound();
+            }
+
+            todo.Title = data.Title;
+            todo.Date = data.Date;
+        }
+
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
     }
 
     [HttpPost]

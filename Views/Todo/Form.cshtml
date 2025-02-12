@@ -10,7 +10,8 @@
     </div>
 </div>
 
-<form method="post" asp-action="Create">
+<form method="post" asp-action="save">
+    <input asp-for="Id" type="hidden" />
     <div class="mb-3">
         <label asp-for="Title" class="form-label">Título</label>
         <input asp-for="Title" class="form-control" />
@@ -25,18 +26,3 @@
 
     <button type="submit" class="btn btn-primary">Salvar</button>
 </form>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); // Janeiro é 0!
-            var yyyy = today.getFullYear();
-
-            today = yyyy + '-' + mm + '-' + dd;
-            document.getElementById('dateField').value = today;
-        });
-    </script>
-}
